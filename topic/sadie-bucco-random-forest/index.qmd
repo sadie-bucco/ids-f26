@@ -1,5 +1,6 @@
 ---
 title: "Random Forest"
+subtitle: "Topic Presentation | STAT 3255"
 author: "Sadie Bucco"
 format:
   revealjs:
@@ -62,11 +63,11 @@ prediction [@breiman2001random].\
 \
 **Bootstrapping**: 
 Resamples rows with replacement to create each tree's training set --> 
-randomizes the data\
+randomizes the rows\
 \
 **Feature Subsampling**: 
 Randomly restricts which predictors can be considered at each split --> 
-randomizes the predictors
+randomizes the columns
 
 ## Random Forest Main Ideas
 Randomization forces trees to consider different splits to capture patterns a
@@ -116,7 +117,8 @@ Random Forest is implemented using the `scikit-learn` package in Python
 Using random forest, how accurately can we predict a long closure request?\
 \
 Data: NYC Open Data's 311 Service Requests [@nyc3112020present]\
-  - Filtered for illegal parking requests from Labor Day week 2026
+\
+Filtered for illegal parking requests from Labor Day week 2026
 
 ## Setting up the Data 
 
@@ -164,7 +166,7 @@ y = model_data['long_closure']
 
 ## Why Dummy Variables?
 
-- scikit-learn models need numeric inputs [@scikit-learn]
+- `scikit-learn` models need numeric inputs [@scikit-learn]
   - Categories are converted to 0/1 columns 
 - Works well for variables with few categories 
 - For variables with many categories, dummies create too many columns
@@ -243,9 +245,9 @@ results
 ## Additional Metrics to Consider
 
 - **Precision:** TP / (TP + FP)\
-Of the requests predicted to be at least 2 hours, how many actually were\
+Of the requests predicted to be long closures, how many actually were\
 - **Recall:** TP / (TP + FN)\
-Of the requests that really were at least 2 hours, how many did the model catch\
+Of the requests that really were long closures, how many did the model catch\
 - **F1:** Combines precision and recall into one number 
 
 ## Results
@@ -278,7 +280,7 @@ results.style.hide().format(precision=3).set_table_styles([
 ## Tuning with Hyperparameters
 
 - Random forest models are often tuned using grid search cross validation 
-  - Implemented using `GridSearchCV` from scikit-learn 
+  - Implemented using `GridSearchCV` from `scikit-learn`
 - Evaluates each combination of hyperparameters with cross validation
 - Selects best performing combination
 - Tune on F1: rewards catching long closures
@@ -291,10 +293,9 @@ from sklearn.model_selection import GridSearchCV
 
 # define parameters to test
 param_grid = {
-    'n_estimators': [100, 200],
-    'max_depth': [None, 10, 20],
-    'min_samples_split': [2, 5],
-    'min_samples_leaf': [1, 2]
+    'max_depth': [None, 10], # total number of levels
+    'max_features': ['sqrt', 'log2', 0.5], # how many predictors at each split
+    'min_samples_leaf': [1, 10] # minimum number of samples needed in each leaf
 }
 
 # grid search with 5-fold cross validation
@@ -337,9 +338,10 @@ results.style.hide().format(precision=3).set_table_styles([
     {"selector": "", "props": "width:auto"},
     {"selector": "th,td", "props": "font-size:40px; padding:1px 6px"}])
 ```
-- Tuned random forest does slightly better on F1 than the random forest 
-(51.8% vs 51.3%)
-- We can test more parameters and value combinations to try to improve the model
+- Tuned random forest does better on F1 than the original random forest (54.2% 
+vs 51.3%)
+- We can test more parameters and value combinations to try to improve the 
+model more
 
 ## Confusion Matrices
 
@@ -373,7 +375,7 @@ tuned_confusion = make_confusion_table(y_test, new_pred)
 - Overall, tuned random forest performs best for minimizing false negatives
   - Decision Tree: 668 FN
   - Random Forest: 638 FN 
-  - Tuned RF: 630 FN
+  - Tuned RF: 594 FN
 
 ## Random Forest Limitations 
 
