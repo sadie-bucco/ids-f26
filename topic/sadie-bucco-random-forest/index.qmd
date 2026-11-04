@@ -10,9 +10,9 @@ format:
     theme: default
     incremental: false
     echo: true
+jupyter: python3
 bibliography: references.bib
 nocite: '@*'
-jupyter: python3
 ---
 
 ## Introduction
@@ -20,8 +20,8 @@ My name is Sadie Bucco and I am a senior Statistical Data Science major.
 I am studying Biological Data Science and am pursuing an MCB minor.\
 \
 **Why I chose this topic**:\
-- I currently work in a microbiology research lab\
-- I want to use random forest for data analysis 
+I currently work in a microbiology research lab and I want to use random forest
+for data analysis.
 
 ## What is Random Forest?
 
@@ -34,15 +34,14 @@ It uses decision trees to make predictions for classification and regression pro
 
 ## How Decision Trees Work
 
-- A single decision tree scans every predictor and chooses the one that 
-splits the data most cleanly 
+- A single decision tree scans every predictor and chooses the one that splits the data most cleanly 
 - Higher purity = cleaner split
   - Classification: Gini impurity, entropy, log loss
   - Regression: MSE, MAE
 
 ## Limitations of Decision Trees
 
-**Main Problems: Overfitting and High Variance**\
+**Overfitting and High Variance**\
 
 - Decision tree algorithm is **greedy** [@james2023islp]
   - The tree picks the best split at each step, never looking ahead 
@@ -51,25 +50,27 @@ splits the data most cleanly
 
 ## Solution: Random Forest
 
-Rather than relying on one decision tree, random forest introduces **randomization**
-[@breiman2001random].\
+Rather than relying on a single decision tree, random forest introduces
+**randomization** and uses **multiple randomized decision trees** to make a
+prediction [@breiman2001random].\
 
-- Bootstrapping
-- Feature Subsampling\
+- Bootstrapping 
+- Feature Subsampling\ 
 \
-The model then uses multiple randomized decision trees to make a prediction.
 
 ## Bootstrapping and Feature Subsampling
 \
 **Bootstrapping**: 
-Resamples rows with replacement to create each tree's training set\
+Resamples rows with replacement to create each tree's training set --> 
+randomizes the data\
 \
 **Feature Subsampling**: 
-Randomly restricts which predictors can be considered at each split 
+Randomly restricts which predictors can be considered at each split --> 
+randomizes the predictors
 
 ## Random Forest Main Ideas
-Randomization forces trees to consider different splits [@breiman2001random].\
-**Goal**: Capture patterns a single greedy tree may miss.\
+Randomization forces trees to consider different splits to capture patterns a
+single greedy tree may miss [@breiman2001random].\
 \
 **Ensemble Learning**\
 Prediction is based on **all of the trees**, and each tree gets one equal vote.\
@@ -158,8 +159,8 @@ y = model_data['long_closure']
 ```
 - **Response**: 
   - long_closure = 1 if the request took at least 2 hours to close
-  - long_closure = 0 if the request took less than 2 hours to close
-- **Predictors**: time of day (4 6-hour blocks), day of week, borough, problem detail
+  - not long_closure = 0 if the request took less than 2 hours to close
+- **Predictors**: time of day (four 6-hour blocks), day of week, borough, problem detail
 
 ## Why Dummy Variables?
 
