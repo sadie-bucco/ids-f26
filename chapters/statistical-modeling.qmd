@@ -16,7 +16,6 @@ The perfect-separation presentation simulates a pass/fail example where one
 cutoff splits the outcomes perfectly, so logistic regression has no finite
 best slope. It shows the warning signs, then compares a ridge penalty and
 merged categories as fixes and previews Firth's method.
-Presentations will be added during the semester.
 
 The decision tree presentation introduces random forest and explains how it
 improves on single decision trees through bootstrapping and feature
