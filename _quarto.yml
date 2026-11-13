@@ -19,6 +19,8 @@ book:
     - name: Jack Parkins
     - name: Chaoyang Wang
     - name: Leo Wang
+    - name: Erik Chervonny
+    - name: Sadie Bucco
   date: today
   chapters:
     - index.qmd
