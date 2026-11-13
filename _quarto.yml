@@ -11,6 +11,7 @@ book:
   author:
     - name: Jun Yan
       url: https://statcomp.org
+    - name: Sadie Bucco
     - name: Erik Chervonny
     - name: Mahiba Mansur
     - name: Carter Morissette
@@ -19,7 +20,6 @@ book:
     - name: Jack Parkins
     - name: Chaoyang Wang
     - name: Leo Wang
-    - name: Sadie Bucco
   date: today
   chapters:
     - index.qmd
