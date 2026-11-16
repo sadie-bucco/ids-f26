@@ -390,7 +390,7 @@ for n in [100, 200]:
     f1 = cross_val_score(rf_n, X_train, y_train, cv = 5, scoring = "f1").mean()
     print(n, round(f1, 4))
 ```
-- CV F1 was 0.5185 with 100 trees and 0.5234 with 200
+- CV F1 was 0.5185 with 100 trees and 0.5232 with 200
 - The gain is modest, so 100 trees seems reasonable here
 
 ## New Results
@@ -408,28 +408,13 @@ m = results.set_index("Model")
 
 results.style.hide().format(precision=4)
 ```
-- Tuning did not improve test F1 here (`{python} pct(m.loc['Tuned RF', 'F1'])`
-vs `{python} pct(m.loc['RF', 'F1'])` for the original RF)
-- By test F1, the original RF is the best of these candidates on this split
-  - Its recall is only `{python} pct(m.loc['RF', 'Recall'])` but still higher
-  than the other models
-
-## Interpretation
-
-- The difference between RF and tuned RF is small and comes from only one
-split, so it could be due to noise
-- Stronger regularization (larger leaves, shallower trees) from tuning does not
-automatically improve held-out performance
-- Fully grown trees often work well in forests because averaging already
-reduces variance [@scikitlearn2026ensembles]
-
-## Important Considerations
-
-- Tuning choices are made with training-set CV only
-  - Further tuning based on test results would turn the test set into part of
-the training process, so no further tuning is done
-- This random split within one week evaluates requests from that period and
-does not show how the model would forecast future weeks
+- Tuning slightly improves test F1 on this split 
+(`{python} pct(m.loc['Tuned RF', 'F1'])`
+vs `{python} pct(m.loc['RF', 'F1'])`)
+- Based on test F1, the tuned RF appears to be the best of these candidates on this split
+- The original RF still achieves a slightly higher recall 
+(`{python} pct(m.loc['RF', 'Recall'])` vs 
+`{python} pct(m.loc['Tuned RF', 'Recall'])`)
 
 ## Confusion Matrices
 
@@ -447,10 +432,30 @@ pd.DataFrame(rows).T
 - Positive class: long closure (2 hours or more)
 - Assumption: false negatives (actually long, predicted under 2 hours) are
 costlier
-- False negatives: tuned RF `{python} rows['Tuned RF']['FN']`, RF
-`{python} rows['RF']['FN']`, decision tree
-`{python} rows['Decision Tree']['FN']`
-- RF misses the fewest long closures
+- Tradeoff: Tuned RF achieves slightly higher test F1, but the original RF
+achieves higher recall and fewer false negatives (578 vs 587)
+
+## Interpretation
+
+- The tuned RF achieves slightly higher F1, while the original RF catches more 
+long closures (higher recall and fewer false negatives)
+- If minimizing missed long closures is the priority, the original RF may be 
+preferable
+- The differences are small and come from only one split, so they do not 
+establish a general advantage for either model
+- Stronger regularization (larger leaves, shallower trees) from tuning does not
+automatically improve held-out performance
+- Fully grown trees often work well in forests because averaging already
+reduces variance [@scikitlearn2026ensembles]
+
+## Important Considerations
+
+- Tuning choices are made with training-set CV only
+  - Further tuning based on test results would turn the test set into part of
+the training process, so no further tuning is done
+- This random split within one week evaluates requests from that period and
+does not show how the model would forecast future weeks
+
 
 ## Random Forest Limitations
 
