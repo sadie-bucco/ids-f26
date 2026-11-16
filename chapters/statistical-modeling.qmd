@@ -17,7 +17,7 @@ cutoff splits the outcomes perfectly, so logistic regression has no finite
 best slope. It shows the warning signs, then compares a ridge penalty and
 merged categories as fixes and previews Firth's method.
 
-The decision tree presentation introduces random forest and explains how it
+The random forest presentation introduces random forest and explains how it
 improves on single decision trees through bootstrapping and feature
 subsampling. It walks through a classification example in Python using NYC 311
 Service Request data, covering evaluation metrics and grid search tuning, and
