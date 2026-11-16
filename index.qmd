@@ -493,9 +493,9 @@ accepted.
 ### Final Project Presentation Schedule
 
 The final-project presentation schedule follows the same seeded student order.
-The final two instructional weeks and the exam-period meeting are reserved for
-final presentations. Replace the exam-period placeholder with the confirmed
-date. The [Final Project Presentations](chapters/final-project-presentations.qmd)
+The final two instructional weeks and the December 12 meeting, from
+10:00 a.m. to noon, are reserved for final presentations. The
+[Final Project Presentations](chapters/final-project-presentations.qmd)
 chapter collects links to the rendered decks.
 
 | Date | Presenter | Project |
@@ -516,12 +516,12 @@ chapter collects links to the rendered decks.
 | 12/09 | Distefano, Cristian | [project] |
 | 12/09 | Nair, Pardhip | [project] |
 | 12/09 | Morissette, Carter | [project] |
-| 12/19 (8:00-10:00) | Maras, Ruveyda | [project] |
-| 12/19 (8:00-10:00) | Wang, Leo | [project] |
-| 12/19 (8:00-10:00) | Choudhury, Ruhama | [project] |
-| 12/19 (8:00-10:00) | Hartman, Mikaela | [project] |
-| 12/19 (8:00-10:00) | Kiani, Ismail | [project] |
-| 12/19 (8:00-10:00) | Kelly, Daniel | [project] |
+| 12/12 (10:00-12:00) | Maras, Ruveyda | [project] |
+| 12/12 (10:00-12:00) | Wang, Leo | [project] |
+| 12/12 (10:00-12:00) | Choudhury, Ruhama | [project] |
+| 12/12 (10:00-12:00) | Hartman, Mikaela | [project] |
+| 12/12 (10:00-12:00) | Kiani, Ismail | [project] |
+| 12/12 (10:00-12:00) | Kelly, Daniel | [project] |
 
 ## Contributing to the Collaborative Notes
 
