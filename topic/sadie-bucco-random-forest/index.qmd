@@ -408,12 +408,13 @@ m = results.set_index("Model")
 
 results.style.hide().format(precision=4)
 ```
-- Tuning slightly improves test F1 on this split 
+- Tuning slightly improves test F1 on this split
 (`{python} pct(m.loc['Tuned RF', 'F1'])`
 vs `{python} pct(m.loc['RF', 'F1'])`)
-- Based on test F1, the tuned RF appears to be the best of these candidates on this split
-- The original RF still achieves a slightly higher recall 
-(`{python} pct(m.loc['RF', 'Recall'])` vs 
+- Based on test F1, the tuned RF appears to be the best of these
+  candidates on this split
+- The original RF still achieves a slightly higher recall
+(`{python} pct(m.loc['RF', 'Recall'])` vs
 `{python} pct(m.loc['Tuned RF', 'Recall'])`)
 
 ## Confusion Matrices
@@ -431,18 +432,19 @@ pd.DataFrame(rows).T
 ```
 - Positive class: long closure (2 hours or more)
 - Assumption: false negatives (actually long, predicted under 2 hours) are
-costlier
+  costlier
 - Tradeoff: Tuned RF achieves slightly higher test F1, but the original RF
-achieves higher recall and fewer false negatives (578 vs 587)
+  achieves higher recall and fewer false negatives (`{python} rows['RF']['FN']`
+  vs `{python} rows['Tuned RF']['FN']`).
 
 ## Interpretation
 
-- The tuned RF achieves slightly higher F1, while the original RF catches more 
-long closures (higher recall and fewer false negatives)
-- If minimizing missed long closures is the priority, the original RF may be 
-preferable
-- The differences are small and come from only one split, so they do not 
-establish a general advantage for either model
+- The tuned RF achieves slightly higher F1, while the original RF catches
+  more long closures (higher recall and fewer false negatives).
+- If minimizing missed long closures is the priority, the original RF may be
+  preferable.
+- The differences are small and come from only one split, so they do not
+  establish a general advantage for either model.
 - Stronger regularization (larger leaves, shallower trees) from tuning does not
 automatically improve held-out performance
 - Fully grown trees often work well in forests because averaging already
